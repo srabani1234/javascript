@@ -1,0 +1,65 @@
+
+<script>
+const resturant = 
+
+{name: 'Javed Habib',
+location: ['pune','delhi','kolkata'],
+category: ['Italinan','pizaterian','vegiterian','organic'],
+startmenu: ['bred','luchi','begunbhja','cannage'],
+maimenu: ['pizza','pasta','origano','brocoli'],
+openingHours:{
+    thu:{
+        open:12,
+        close:22,
+    },
+    fri:{
+        open:11,
+        close:23,
+    },
+    sat:{
+        open:24,
+        close:24,
+    }
+
+
+},
+orderPizza: function(mainIngrediant,...aditionalIngredeiant){
+console.log(mainIngrediant);
+console.log(aditionalIngredeiant);
+}
+
+};
+
+// multiple value pass usingrest pattern
+resturant.orderPizza('mashrom','chili','panner','bread'); 
+
+// rest pattern for array
+const [breadkk,,kbegunbhaja,...otherfood]=[...resturant.startmenu,...resturant.maimenu];
+console.log(breadkk,kbegunbhaja,otherfood);
+
+// rest pattern for object
+
+const {sat, ...weekdays} = resturant.openingHours; // here we seperate sat so fri & thu should store in weekdays
+console.log(sat,weekdays);
+
+// rest pattern with function
+
+const add = function(...number){
+    var sum=0;
+    console.log(number);
+    console.log(...number);
+    for(var i=0;i<number.length;i++){
+        sum=sum+number[i];
+        console.log("number index"+number[i]);
+        
+
+    }console.log("sum:"+sum);
+  
+}
+
+add(1,2);
+add(1,2,3);
+const x= [5,6,7];
+add(...x);
+
+</script>

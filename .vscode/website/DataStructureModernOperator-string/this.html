@@ -1,0 +1,28 @@
+
+<script>
+    "use strict"
+
+const sum=  (a)=> {
+    
+    console.log(a);
+    console.log(this);
+}
+sum(10);
+const jonas={
+year : 1991,
+
+calAge: function(){
+console.log(this)
+console.log(2037-this.year);
+}
+
+};
+jonas.calAge();
+const mithula ={
+year :2017,
+
+};
+ mithula.calAge = jonas.calAge ;
+ mithula.calAge();
+
+</script>

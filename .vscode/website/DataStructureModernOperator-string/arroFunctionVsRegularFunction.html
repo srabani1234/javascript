@@ -1,0 +1,36 @@
+<script>
+"use strict"
+   // let t=45;
+const jones ={
+firstName :"Jnoas",
+year:1991,
+
+calAge : function(){
+    console.log(this);
+    console.log(2037-this.year);
+    console.log(year);
+   // console.log(this.t);
+ //const self =this;
+    const isMillinial= ()=>{
+
+        console.log(this);
+       console.log(this.year>1981 && this.year<1996);
+    };
+    isMillinial();
+},
+
+
+great: ()=>{
+    
+    //console.log(this.t);
+    console.log(this);
+console.log(`Hey: ${this.year}`);
+}
+}
+jones.calAge();
+jones.great();
+
+
+
+
+</script>

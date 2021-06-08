@@ -1,0 +1,100 @@
+<script>
+
+const resturant ={
+        name: 'Javed Habib',
+        location: ['pune','delhi','kolkata'],
+        category: ['Italinan','pizaterian','vegiterian','organic'],
+        startmenu: ['bred','luchi','begunbhja','cannage'],
+        maimenu: ['pizza','pasta','origano','brocoli'],
+        openingHours:{
+            thu:{
+                open:12,
+                close:22,
+            },
+            fri:{
+                open:11,
+                close:23,
+            },
+            sat:{
+                open:24,
+                close:24,
+            }
+
+
+        },
+        // order:function(starterIndex,MainIndex){
+        //     return [this.startmenu[starterIndex] ,this.maimenu[MainIndex]];
+
+        // },
+        orderDelivery :function({starterIndex=1,MainIndex=2,Time='20:00',Address}){
+           console.log(`Order received! ${this.startmenu[starterIndex]} and ${this.maimenu[MainIndex] } at Address ${Address} on time ${Time}}`);
+        }
+    
+    
+    };
+
+    // pass object as function argument and destructure that object
+
+    resturant.orderDelivery({
+        starterIndex:2,
+        MainIndex:2,
+        Time:'21:00',
+        Address: "Vilen"
+
+    });
+    resturant.orderDelivery({
+      
+        Time:'23:00',
+        Address: "Vilen nn"
+
+    });
+
+    const {name,openingHours,category}=resturant;
+    console.log(name,openingHours,category);
+
+    const {name:resturentName,openingHours:hours,category:tags}=resturant;
+    console.log(resturentName,hours,tags);
+
+    // destrustrucure with default vale
+
+    const {menu=[],startmenu:starter=[]} =resturant;
+    console.log(menu,starter)
+
+    //Object destucturing with mutable variable
+    let a=10;
+    let b=20;
+const obj ={a:7,b:9,c:50};
+({a,b}=obj);
+console.log(a,b);
+// Nested Object desturing
+const {fri}=openingHours;
+// or we can const {fri:{open,close}} =openingHours;
+const {open:o,close:c} =fri
+console.log(fri);
+//console.log(open,close);
+console.log(o,c);
+//spread pattern
+const newObject = {fundIn: 2009,...resturant};
+console.log(newObject);
+
+// if don't use ... and copy one object other. then if we change one object property affet it other object
+const resturantCopy = resturant;
+resturantCopy.name="samgita";
+console.log(resturantCopy.name);
+console.log(resturant.name);
+
+// rest pattern
+const [breadkk,,kbegunbhaja,...otherfood]=[...resturant.startmenu,...resturant.maimenu];
+console.log(breadkk,kbegunbhaja,otherfood);
+
+
+// for of loop
+
+const menu1 =[...resturant.maimenu,...resturant.startmenu];
+
+console.log(...menu1.entries());
+for(const item of menu1.entries()){
+console.log(item);
+}
+
+</script>

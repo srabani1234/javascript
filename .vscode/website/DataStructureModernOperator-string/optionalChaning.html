@@ -1,0 +1,60 @@
+<script>
+    "use strict"
+
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+    const resturant ={
+            name: 'Javed Habib',
+            location: ['pune','delhi','kolkata'],
+            category: ['Italinan','pizaterian','vegiterian','organic'],
+            startmenu: ['bred','luchi','begunbhja','cannage'],
+            maimenu: ['pizza','pasta','origano','brocoli'],
+            // E6 enhanse object literal
+            openingHours,
+            // E6 enhance function
+        
+             order(starterIndex,MainIndex){
+            return [this.startmenu[starterIndex] ,this.maimenu[MainIndex]];
+
+        },
+        
+        
+        };
+        // use for object
+
+       console.log(resturant.openingHours.mon?.open);//undefine
+       console.log(resturant.openingHours?.fri?.open);//11 if openingHours exis then check friday exist or not.if fri exist then print open data
+       const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+       for (const day of days){
+           console.log(day);
+           console.log(openingHours[day]);
+           console.log(resturant.openingHours[day]?.open??'closed');
+
+       }
+       //use for metho alose . if method exist pass parameter
+
+console.log(resturant.order?.(2,2)??"Method not exist");
+console.log(resturant.ordere?.(2,2)??"Method not exist");
+// use for array
+
+const user = [{name:'srabani',email:"srabani#",add:"tesr"}]
+console.log(user);
+console.log(user[0]?.name??"not exist");
+
+    
+    </script>

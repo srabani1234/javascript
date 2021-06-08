@@ -1,0 +1,61 @@
+<script>
+
+    const resturant ={
+        name: 'Javed Habib',
+        location: ['pune','delhi','kolkata'],
+        category: ['Italinan','pizaterian','vegiterian','organic'],
+        startmenu: ['bred','luchi','begunbhja'],
+        maimenu: ['pizza','pasta','origano'],
+        order:function(starterIndex,MainIndex){
+            return [this.startmenu[starterIndex] ,this.maimenu[MainIndex]];
+
+        },
+    
+    
+    };
+
+// const arr =[1,2,3]
+// arr[0]=1;
+// arr[1]=2;
+// arr[2]=3;
+// const [x,y,z] =arr; // not array just desturing assignment
+
+// console.log(x,y,z);
+// console.log(arr);
+
+//const [first,second]=resturant.category;
+//console.log(first,second);
+
+let [first, ,last]=resturant.category;
+console.log(first,last);
+// switching variables
+//way 1
+// const temp = first;
+// first=last;
+// last=temp;
+//way-2
+[last,first]=[first,last]
+console.log(first,last);
+// destruction using function
+
+const [starter,main]= resturant.order(0,2);
+
+console.log(starter,main)
+
+// Nested destruction
+
+const nested =[1,2,[3,5]];
+const [i,,[j,k]] = nested;
+
+console.log(i,j,k);
+
+// defult value in destruc
+
+const [a=1,b=1,c=1] =[6];
+console.log(a,b,c);
+
+
+
+
+
+</script>

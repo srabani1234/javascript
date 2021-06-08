@@ -1,0 +1,65 @@
+<script>
+    "use strict"
+
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+    const resturant ={
+            name: 'Javed Habib',
+            location: ['pune','delhi','kolkata'],
+            category: ['Italinan','pizaterian','vegiterian','organic'],
+            startmenu: ['bred','luchi','begunbhja','cannage'],
+            maimenu: ['pizza','pasta','origano','brocoli'],
+            // E6 enhanse object literal
+            openingHours,
+            // E6 enhance function
+            orderDelivery({starterIndex=1,MainIndex=2,Time='20:00',Address}){
+               console.log(`Order received! ${this.startmenu[starterIndex]} and ${this.maimenu[MainIndex] } at Address ${Address} on time ${Time}}`);
+            }
+        
+        
+        };
+
+        resturant.orderDelivery({
+        starterIndex:2,
+        MainIndex:2,
+        Time:'21:00',
+        Address: "Vilen"
+
+    });
+    resturant.orderDelivery({
+      
+        Time:'23:00',
+        Address: "Vilen nn"
+
+    });
+    
+    console.log(resturant.openingHours);
+        const {name,category}=resturant;
+        console.log(name,category);
+    
+
+    const {fri}=openingHours;
+    // or we can const {fri:{open,close}} =openingHours;
+    const {open:o,close:c} =fri
+    console.log(fri);
+    //console.log(open,close);
+    console.log(o,c);
+   
+    
+
+    
+    </script>
