@@ -1,0 +1,35 @@
+<script>
+"use strict"
+
+const flight = "LH24"
+const jonas = {
+    name : "Jonas Steave",
+    passport: 21345555,
+};
+
+const checkIn=function(flightNum,passengers){
+flightNum = "LH78";
+passengers.name = "Mr."+ passengers.name;
+if(passengers.passport===21345555){
+    alert("check In");
+}else{
+    alert("not check In");
+}
+
+}
+checkIn(flight,jonas);
+console.log(flight);
+console.log(jonas);
+
+const newPassport = function(person){
+person.passport = Math.trunc(Math.random() * 10000)
+console.log(person.passport);
+}
+newPassport(jonas);
+checkIn(flight,jonas);
+
+
+
+
+
+</script>

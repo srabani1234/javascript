@@ -1,0 +1,21 @@
+<script>
+
+// add defaultparameter to array
+let arr=[];
+const defaultParam = function(flightName,price=1,passa=1){
+
+const flight ={
+    flightName,
+    price,
+    passa,
+}
+console.log(flight);
+const {flightName:f,price:pr,passa:p}=flight;
+console.log(f,pr,p)
+console.log(arr.push(flight));
+//console.log(arr.push(f,pr,p));
+console.log(arr)
+}
+defaultParam("sra",12);
+
+</script>

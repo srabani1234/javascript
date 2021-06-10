@@ -1,0 +1,19 @@
+<script>
+const data = new Set(["pizza","pasta","pizza"]);
+console.log(data);
+console.log(new Set('jonnas'));
+console.log(data.add("garlic bred"))
+console.log(data.add("bred"))
+console.log(data.delete("bred"));
+
+const arr = ['staff','manager','staff','emp']
+const uniqueArr = new Set(arr);
+console.log(uniqueArr);
+for (const i of uniqueArr){
+console.log(i);
+
+}
+
+const unique = [...new Set(arr)];
+console.log(unique);
+</script>

@@ -1,0 +1,31 @@
+<script>
+const oneWord = function(str){
+return str.replace(" ","").toLowerCase();
+}
+
+const toUpperFirstLetter = function(str){
+const [first, ...others]=str.split(' ');
+return [first.toUpperCase(),...others].join(' ');
+
+}
+
+const transformer = function(str, fn){
+console.log(`original String:${str}`);
+console.log(`Transformed String:${fn(str)}`);
+console.log(`Function name:${fn.name}`)
+}
+
+transformer("This is best language!",toUpperFirstLetter)
+
+
+function greeting(name) {
+  alert('Hello ' + name);
+}
+
+function processUserInput(callback) {
+  var name = prompt('Please enter your name.');
+  callback(name);
+}
+
+processUserInput(greeting);
+</script>

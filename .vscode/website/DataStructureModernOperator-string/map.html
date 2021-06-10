@@ -1,0 +1,26 @@
+<script>
+
+const question = new Map(
+[
+
+['Question','What is the best program?'],
+[1,'C'],
+[2,'A'],
+[3,'B'],
+[1,'C']
+
+]
+
+);
+const se = [... new Set(question.values())];
+console.log(se)
+
+
+console.log(question);
+console.log(question.values());
+console.log([...question]);
+console.log([...question.keys()]);
+console.log(...question.entries());
+
+
+</script>
