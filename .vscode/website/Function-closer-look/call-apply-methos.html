@@ -1,0 +1,38 @@
+<script>
+
+const lutsana ={
+    airline: 'lutsana',
+    airCode: 'LH',
+    booking:[],
+    bookFlight(flightNum,name){
+        console.log(`${name} booked ${this.airline} number ${this.airCode}${flightNum}`);
+        // push new object
+this.booking.push({flight:`${this.airCode}${flightNum}`,name});
+    }
+}
+
+
+lutsana.bookFlight(234,"Jonas Steave");
+console.log(lutsana);
+
+const spice={
+    airline: 'spice',
+    airCode: 'SP',
+    booking:[],
+}
+//call() method
+lutsana.bookFlight.call(spice, 278,'Srabani Adhikary');
+console.log(spice)
+lutsana.bookFlight.call(lutsana, 278,'Srabani Adhikary');
+
+//apply methd
+lutsana.bookFlight.apply(spice,[456,'azahar gert']);
+//instead of that use caal()
+const data = [786,'lata tara'];
+lutsana.bookFlight.call(spice,...data)
+
+// bind()
+
+let bindObject = lutsana.bookFlight.bind(spice,4568);
+bindObject("fgt hh");
+</script>

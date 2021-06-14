@@ -1,0 +1,43 @@
+<script>
+let f;
+const g = function(){
+    var a=90;
+    f=function(){
+        console.log(`${a}`);
+    }
+}
+const h = function(){
+    var b=7;
+    f=function(){
+        console.log(`${b}`);
+    }
+}
+g();
+f()
+
+// reassign f
+h();
+f();
+
+
+
+
+
+const outerFun= function(a){
+var b=90
+
+console.log("outer");
+return function(){
+    var sum = a+b;
+    console.log(`${sum}`);
+}
+}
+var inner=outerFun(12);
+inner();
+//console.log(inner);
+
+
+
+
+
+</script>

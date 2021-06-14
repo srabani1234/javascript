@@ -1,0 +1,25 @@
+<script>
+
+const name={
+
+    firstName : "srabani",
+    lastName: "Adhiary"
+}
+
+const name2={
+
+    firstName : "karti",
+    lastName: "ada"
+
+}
+
+const fullName = function(city,state){
+console.log(`${this.firstName} ${this.lastName} has ${city} and ${state}`)
+}
+
+let bindUp = fullName.bind(name);
+bindUp('Bnagalore','KA')
+let bindUp1 = fullName.bind(name2);
+bindUp('Mumbai','MA')
+
+</script>
