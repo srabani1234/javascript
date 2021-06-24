@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <title>Bankist</title>
+  </head>
+  <body>
+    <!-- TOP NAVIGATION -->
+    <nav>
+      <p class="welcome">Log in to get started</p>
+      <img src="logo.png" alt="Logo" class="logo" />
+      <form class="login">
+        <input
+          type="text"
+          placeholder="user"
+          class="login__input login__input--user"
+        />
+        <!-- In practice, use type="password" -->
+        <input
+          type="text"
+          placeholder="PIN"
+          maxlength="4"
+          class="login__input login__input--pin"
+        />
+        <button class="login__btn">&rarr;</button>
+      </form>
+    </nav>
+
+    <main class="app">
+      <!-- BALANCE -->
+      <div class="balance">
+        <div>
+          <p class="balance__label">Current balance</p>
+          <p class="balance__date">
+            As of <span class="date">05/03/2037</span>
+          </p>
+        </div>
+        <p class="balance__value">0000€</p>
+      </div>
+
+      <!-- MOVEMENTS -->
+      <div class="movements">
+        <div class="movements__row">
+          <div class="movements__type movements__type--deposit">2 deposit</div>
+          <div class="movements__date">3 days ago</div>
+          <div class="movements__value">4 000€</div>
+        </div>
+        <div class="movements__row">
+          <div class="movements__type movements__type--withdrawal">
+            1 withdrawal
+          </div>
+          <div class="movements__date">24/01/2037</div>
+          <div class="movements__value">-378€</div>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="summary">
+        <p class="summary__label">In</p>
+        <p class="summary__value summary__value--in">0000€</p>
+        <p class="summary__label">Out</p>
+        <p class="summary__value summary__value--out">0000€</p>
+        <p class="summary__label">Interest</p>
+        <p class="summary__value summary__value--interest">0000€</p>
+        <button class="btn--sort">&downarrow; SORT</button>
+      </div>
+
+      <!-- OPERATION: TRANSFERS -->
+      <div class="operation operation--transfer">
+        <h2>Transfer money</h2>
+        <form class="form form--transfer">
+          <input type="text" class="form__input form__input--to" />
+          <input type="number" class="form__input form__input--amount" />
+          <button class="form__btn form__btn--transfer">&rarr;</button>
+          <label class="form__label">Transfer to</label>
+          <label class="form__label">Amount</label>
+        </form>
+      </div>
+
+      <!-- OPERATION: LOAN -->
+      <div class="operation operation--loan">
+        <h2>Request loan</h2>
+        <form class="form form--loan">
+          <input type="number" class="form__input form__input--loan-amount" />
+          <button class="form__btn form__btn--loan">&rarr;</button>
+          <label class="form__label form__label--loan">Amount</label>
+        </form>
+      </div>
+
+      <!-- OPERATION: CLOSE -->
+      <div class="operation operation--close">
+        <h2>Close account</h2>
+        <form class="form form--close">
+          <input type="text" class="form__input form__input--user" />
+          <input
+            type="password"
+            maxlength="6"
+            class="form__input form__input--pin"
+          />
+          <button class="form__btn form__btn--close">&rarr;</button>
+          <label class="form__label">Confirm user</label>
+          <label class="form__label">Confirm PIN</label>
+        </form>
+      </div>
+
+      <!-- LOGOUT TIMER -->
+      <p class="logout-timer">
+        You will be logged out in <span class="timer">05:00</span>
+      </p>
+    </main>
+
+    <!-- <footer>
+      &copy; by Jonas Schmedtmann. Don't claim as your own :)
+    </footer> -->
+
+    <script >
+'use strict';
+        /////////////////////////////////////////////////
+// BANKIST APP
+
+/////////////////////////////////////////////////
+// Data
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+// Element
+const lableWelCome = document.querySelector('.welcome');
+const lableApp = document.querySelector('.app');
+const lableBalance = document.querySelector('.balance');
+const containerMovements = document.querySelector('.movements');
+const containerSummary = document.querySelector('.summary');
+const lableOperationTransfer = document.querySelector('.operation operation--transfer');
+const lableOperationLoan = document.querySelector('.operation operation--loan');
+const lableOperationClose = document.querySelector('.operation operation--close');
+const lableLogoutTimer = document.querySelector('.logout-timer');
+// balance
+const balanceLable = document.querySelector('.balance__label');
+const balanceDate = document.querySelector('.balance__date');
+const date = document.querySelector('.date');
+const balanceValue = document.querySelector('.balance__value');
+
+// summary
+const labelSumIn = document.querySelector('.summary__value--in');
+const labelSumOut = document.querySelector('.summary__value--out');
+const labelSumInterest = document.querySelector('.summary__value--interest');
+const labelTimer = document.querySelector('.timer')
+
+const btnLogin = document.querySelector('.login__btn');
+const btnTransfer = document.querySelector('.form__btn--transfer');
+const btnLoan = document.querySelector('.form__btn--loan');
+const btnClose = document.querySelector('.form__btn--close');
+const btnSort = document.querySelector('.btn--sort');
+
+const inputLoginUsername = document.querySelector('.login__input--user');
+const inputLoginPin = document.querySelector('.login__input--pin');
+const inputTransferTo = document.querySelector('.form__input--to');
+const inputTransferAmount = document.querySelector('.form__input--amount');
+const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+const inputCloseUsername = document.querySelector('.form__input--user');
+const inputClosePin = document.querySelector('.form__input--pin');
+
+const displayMovement = function(movement,sort =false){ //by defalt sort false cz display element as per store in array
+    containerMovements.innerHTML='';
+
+const movs = sort? movement.slice().sort((a,b)=>{ // slick create duplicate array and we work on it
+return a-b; // sort assesnding so if sort true
+}):movement;
+
+movs.forEach((move,i,arr)=>{
+console.log(move);
+
+const type = move > 0 ? 'deposit': 'withdrawal';
+
+//const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+const html = `
+      <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${move}€</div>
+      </div>
+    `;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+});
+
+};
+//console.log(containerMovement.innerHTML);
+
+// update ui
+
+const updateUIData=function(acc){
+// Display balance
+displayBalance(acc);
+// Display movements
+displayMovement(acc.movements);
+
+//Display Summary
+displaySummary(acc);
+}
+
+// calculate display balance
+
+const displayBalance = function(acc){
+
+acc.balance = acc.movements.reduce((acc,ele,ind,arr)=>{
+return acc+ele;
+},0);
+
+balanceValue.textContent = `${acc.balance}€`;
+
+}
+
+
+
+//calculate display summary
+const displaySummary = function(acc){
+console.log("suum"+acc.movements);
+const incom = acc.movements.filter((ele,index,arr)=>{
+if(ele>0)
+return ele;
+}).
+reduce((acc,ele,ind,arr)=>{ 
+return Number(acc+ele);
+},0);
+labelSumIn.textContent = `${incom}`;
+
+const out = acc.movements.filter((ele)=>{
+if (ele<0)
+return ele
+}).reduce((acc,ele,ind,arr)=>{
+return acc+ele;
+},0)
+labelSumOut.textContent = `${out}`;
+
+const interest = acc.movements.filter((ele,ind,arr)=>{ // return element 
+if(ele>0)
+return ele;
+}).map((depositeEle,ind,arr)=>{ // return array
+return depositeEle * (acc.interestRate/100);
+}).reduce((acc,ele,ind,arr)=>{
+return acc+ele;
+},0)
+labelSumInterest.textContent =`${interest}`
+}
+
+
+// create user name
+
+const userNane = function(acc){
+  acc.forEach((ele,index,arr)=>{
+//console.log(ele.owner);
+ele.username = ele.owner.toLowerCase().split(' ').map((ele1)=>{
+  //console.log(ele1[0]);
+  return ele1[0];
+}).join('');
+//console.log(accounts.username);
+
+  })
+
+}
+userNane(accounts);
+//console.log(accounts);
+
+
+// Event handler for current Account details
+let currentAccountName;
+btnLogin.addEventListener('click',function(e){
+// prevent form from submitting when click on submit button
+  e.preventDefault();
+  //console.log('Login');
+
+  currentAccountName = accounts.find((ele,ind,arr)=>{
+   // console.log(ele.owner);
+   if (ele.username === inputLoginUsername.value)
+  // console.log(ele.username);
+   return ele;
+  })
+  console.log(currentAccountName);
+  if (currentAccountName?.pin=== Number(inputLoginPin.value)){
+ // Display UI and messages
+ 
+ lableWelCome.textContent = `Welcome back ${currentAccountName.owner .split(' ') [0]}`;
+ lableApp.style.opacity=100;
+
+
+ // Display balance
+
+ // Display movements
+
+ //Display Summary
+ updateUIData(currentAccountName);
+
+
+ // clear input fields
+  inputLoginUsername.value='';
+  inputLoginPin.value='';
+  inputLoginPin.blur();
+
+  }
+});
+
+
+// transfer money
+btnTransfer.addEventListener('click',function(e){
+// prevent form from submitting when click on submit button
+e.preventDefault();
+const amountToTransfer = Number(inputTransferAmount.value);
+const receiverAccount = accounts.find((ele,ind,arr)=>{
+  if (ele.username===inputTransferTo.value)
+  return ele;
+
+});
+inputTransferAmount.value ='';
+inputTransferTo.value='';
+
+if(amountToTransfer>0 && 
+receiverAccount && 
+currentAccountName.balance>=amountToTransfer &&
+receiverAccount?.username!=currentAccountName.username){
+
+currentAccountName.movements.push(-amountToTransfer);
+receiverAccount.movements.push(amountToTransfer);
+//lableApp.style.opacity=100;
+
+//update ui
+updateUIData(currentAccountName);
+
+console.log(receiverAccount.username);
+console.log(amountToTransfer);
+
+}
+console.log(accounts);
+})
+// Loan amount
+
+btnLoan.addEventListener('click',function(e){
+e.preventDefault();
+const loanAmount = Number(inputLoanAmount.value);
+
+if(loanAmount>0 && currentAccountName.movements.some((ele,ind,arr)=>{ // checkany deposite grater than equal 10% of req
+return ele>=loanAmount * (10/100);
+})){
+currentAccountName.movements.push(loanAmount);
+updateUIData(currentAccountName);
+
+}
+inputLoanAmount.value='';
+console.log(currentAccountName);
+
+});
+
+
+// close current user user
+
+btnClose.addEventListener('click',function(e){
+e.preventDefault();
+
+
+if(currentAccountName.username === inputCloseUsername.value 
+&& currentAccountName.pin === Number(inputClosePin.value)){
+
+  const indexToDelete = accounts.findIndex((ele,ind,arr)=>{
+    console.log(ele);
+ return ele;
+  })
+console.log(indexToDelete);
+accounts.splice(indexToDelete,1); //remove that ele object
+
+updateUIData(currentAccountName);
+lableApp.style.opacity=0;
+inputCloseUsername.value='';
+inputClosePin.value='';
+
+}
+
+
+})
+
+// sort button to sort asseccinding only
+
+let sorted=false
+btnSort.addEventListener('click',function(e){
+  e.preventDefault();
+  displayMovement(currentAccountName.movements,!sorted);
+  sorted=!sorted; //need to reset sort as false.if true perform assending sorting.then need to reset so if again click then perform desc
+
+});
+
+// take element from and store in array
+
+balanceValue.addEventListener('click',function(e){
+e.preventDefault();
+const eleInArr = Array.from(document.querySelectorAll(".movements__value"),(ele)=>{
+  return Number(ele.textContent.replace("€",''));
+})
+console.log(eleInArr); //[1300, 70, -130, -650, 3000, -400, 450, 200]
+})
+    </script>
+  </body>
+</html>
+
+

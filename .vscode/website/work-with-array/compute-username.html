@@ -1,0 +1,127 @@
+<script>
+
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+const account5 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+const accounts = [account1, account2, account3, account4,account5];
+
+const userName = function(acc){
+
+acc.forEach(accou => {
+    console.log(accou);
+    accou.username = accou.owner.toLowerCase().split(' ')
+    .map((ele)=>{
+     return ele[0];
+    }).join(''); 
+
+    console.log(accou.username);
+    
+});
+}
+userName(accounts);
+
+// const movements1= [430, 1000, 700, 50, 90];
+// const movement = movements1.reduce((accoumulator,ele,index,arr)=>{
+//      return accoumulator+ele;
+//     },1)
+// console.log(movement);
+
+// movement using reduce
+
+const move = function(acc){
+acc.forEach((ele,index,arr)=>{
+console.log(ele);
+const sumMove=ele.movements.reduce((accu,ele,index,arr)=>{
+    console.log(accu);
+return accu+ele;
+},1)
+console.log(sumMove);
+});
+
+}
+move(accounts);
+// max value
+console.log("----------------------------");
+const arr = [1,9,-50,3000,400,90];
+
+const max = arr.reduce((accu,ele,index,arr)=>{
+ if(accu>ele){
+return accu
+ }
+else{
+   return ele;
+}
+},arr[0])
+
+console.log(max);
+
+
+
+
+
+
+// find method
+
+const findOwner = accounts.find((ele,index,array)=>{
+if (ele.owner==='Jonas Schmedtmann')
+return ele;
+})
+console.log(findOwner)
+
+
+// count of element
+
+const bankDepositeCount = function(acc){
+
+  const test=acc.flatMap((ele)=>{
+    console.log(ele.movements);
+ return ele.movements;
+  }).reduce((acc,ele,arr)=>{
+    console.log(ele);
+   if (ele>=1000){
+   console.log(acc);
+   console.log("ele:"+ele);
+   return acc+1;}
+   else
+   return acc;
+    
+  },0)
+console.log(test)
+
+}
+
+bankDepositeCount(accounts);
+
+
+// sum of deposite and withdrwa
+</script>

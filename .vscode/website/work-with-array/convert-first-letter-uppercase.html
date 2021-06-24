@@ -1,0 +1,16 @@
+<script>
+const titleUpperCase = function(title){
+
+    const exceptWord=['but','a','and','with','or','on','with','the']
+     const titleCase = title.toLowerCase().split(' ').map((ele)=>{
+         console.log(ele.slice(''))
+     return exceptWord.includes(ele)?ele:ele[0].toUpperCase() + ele.slice(1);
+     }).join(' ');
+     return titleCase;
+
+
+}
+
+console.log(titleUpperCase("this is a nice title"));
+
+</script>

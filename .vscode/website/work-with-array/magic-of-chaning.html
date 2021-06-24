@@ -1,0 +1,78 @@
+<script>
+
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+const eutTousd=1.1;
+const movementSum = function(acc){
+
+acc.forEach((element,index,array) => {
+console.log(element);
+const income = element.movements.filter((ele)=>{
+   // console.log(ele);
+if (ele>0)    
+return ele;
+}).map((ele1)=>{
+return ele1*eutTousd;
+}).reduce((acc,ele,ind,arr)=>{
+ return acc +ele;
+},0)
+console.log("income:"+income);
+
+const loass = element.movements.filter((ele)=>{
+if (ele<0)
+return ele;
+}).reduce((acc,ele,ind,arr)=>{
+return acc+ele;
+},0)
+
+console.log("loass:"+loass);
+
+const interest = element.movements.filter((ele)=>{
+if (ele>0)
+return ele;
+}).map((depositeEle,ind,arr)=>{
+    return depositeEle * 1.2/100;
+})
+// filter intereset ele grater than and equal 1
+.filter((intEle,ind,arr)=>{
+ //   console.log("intArr:"+arr);
+ if (intEle>=1)
+ //console.log(intEle);
+ return intEle;
+})
+.reduce((acc,ele,ind,arr)=>{
+return acc+ele;
+})
+console.log("interest:"+interest);
+})
+}
+movementSum(accounts);
+</script>
