@@ -1,0 +1,287 @@
+<script>
+// clone array
+
+var arr = [1,3,6,90];
+
+console.log(arr.slice());
+
+// find max element from array
+
+const max = function(arr){
+
+const maxValue = arr.reduce((acc,ele)=>{
+
+    if (acc>ele){
+        console.log(acc);
+
+        return acc;
+
+    }
+    else 
+    return ele;
+
+},arr[0])
+
+console.log("max:"+maxValue);
+
+}
+max([7,4,9,11,8,3,5,10]);
+
+// Write a JavaScript function to get the first element of an array. Passing a parameter 'n' will return the first 'n' elements of the array. Go to the editor
+
+const first = function (arr,n){
+
+    if (arr===null)
+    return 0;
+    if (n===null)
+    return arr[0]
+    if (n<0)
+    return [];
+    else
+    return arr.slice();
+
+}
+
+console.log(first([7, 9, 0, -2]));
+console.log(first([],3));
+console.log(first([7, 9, 0, -2],3));
+console.log(first([7, 9, 0, -2],6));
+console.log(first([7, 9, 0, -2],-3));
+
+//Write a simple JavaScript program to join all elements of the following array into a string. Go to the editor
+//Sample array : myColor = ["Red", "Green", "White", "Black"];
+// Expected Output :
+// "Red,Green,White,Black"
+// "Red,Green,White,Black"
+// "Red+Green+White+Black"
+
+const joinArray = function(arr){
+
+    //return arr.join(' ');
+
+   // return arr.join(',');
+
+    return arr.join(" + ");
+
+    //return arr.toString();
+
+}
+console.log(joinArray(["Red", "Green", "White", "Black"]));
+
+// Write a JavaScript program which accept a number as input and insert dashes (-) between each two even numbers. For example if you accept 025468 the output should be 0-254-6-8.
+
+const num=window.prompt();
+const str = num.toString();
+const result = [];
+  
+// for(let x=1; x<str.length; x++)
+//   {
+//     if((str[x-1]%2 === 0)&&(str[x]%2 === 0))
+//      {
+//       result.push('-', str[x]);
+//      }
+//     else
+//      {
+//       result.push(str[x]);
+//      }
+//   }
+
+const n = str.split('').map((ele,ind,arr)=>{
+    if(arr[ind-1]%2===0 && arr[ind]%2===0)
+    
+  //return `${ele} and ${ind} and ${arr[ind]}`
+  return result.push('-',arr[ind]);
+
+  else
+  return result.push(arr[ind]);
+
+})
+
+console.log(n)
+console.log(result.join(''));
+
+//  Write a JavaScript program to sort the items of an array. Go to the editor
+//Sample array : var arr1 = [ 3, 8, 7, 6, 5, -4, 3, 2, 1 ];
+//Sample Output : -4,-3,1,2,3,5,6,7,8
+
+const sortAr = function(arr){
+    const s= arr.sort((a,b)=>{
+        console.log(a,b,a-b);
+      // return <0 a come firsr
+      // return =0 nothing
+      // return>0 b come first
+        return a-b;
+    })
+    console.log(s);
+
+}
+sortAr([ 3, 8, 7, 6, 5, -4, 3, 2, 1 ]);
+
+// array reverse
+
+const revArr =  function(arr){
+    var result=[];
+for(var i= arr.length-1;i>=0;i--){
+
+    result.push(arr[i]);
+
+
+}
+console.log(result);
+
+}
+revArr([1,5,7,2,9,7])
+
+// 1st,2nd and 3rd max value from array
+
+function thirdLargest(arr)
+{
+    // There should be atleast three elements /
+ 
+ 
+    // Initialize first, second and third Largest element
+    var first = arr[0], second = arr[0], third = arr[0];
+ 
+    // Traverse array elements to find the third Largest
+    for (var i = 1; i < arr.length ; i ++)
+    {
+        /* If current element is greater than first,
+        then update first, second and third */
+        if (arr[i] > first)
+        {
+            third = second;
+            second = first;
+            first = arr[i];
+        }
+ 
+       // If arr[i] is in between first and second /
+        else if (arr[i] > second)
+        {
+            third = second;
+            second = arr[i];
+        }
+ 
+        /// If arr[i] is in between second and third /
+        else if (arr[i] > third)
+            third = arr[i];
+    }
+    console.log('first:'+first);
+    console.log('second:'+second);
+    console.log('third:'+third);
+ 
+    document.write("The third Largest element is "+ third);
+}
+ 
+// Driver program to test above function /
+// var arr = [12, 13, 1, 10, 34, 16];
+var arr =[9,7,3,50,10,13,100,110]
+//var nn = arr.length;
+thirdLargest(arr);
+
+// first 3 min value
+
+
+function thirdMin(arr)
+{
+    // There should be atleast three elements /
+ 
+ 
+    // Initialize first, second and third Largest element
+    var first = arr[0], second = arr[0], third = arr[0];
+ 
+    // Traverse array elements to find the third Largest
+    for (var i = 1; i < arr.length ; i ++)
+    {
+        /* If current element is greater than first,
+        then update first, second and third */
+        if (arr[i] < first)
+        {
+            third = second;
+            second = first;
+            first = arr[i];
+        }
+ 
+       // If arr[i] is in between first and second /
+        else if (arr[i] < second)
+        {
+            third = second;
+            second = arr[i];
+        }
+ 
+        /// If arr[i] is in between second and third /
+        else if (arr[i] < third)
+            third = arr[i];
+    }
+    console.log('first:'+first);
+    console.log('second:'+second);
+    console.log('third:'+third);
+ 
+    document.write("The third Largest element is "+ third);
+}
+ 
+// Driver program to test above function /
+// var arr = [12, 13, 1, 10, 34, 16];
+var arr =[9,7,3,50,10,13,100,110]
+//var nn = arr.length;
+thirdMin(arr);
+
+// Write a JavaScript program to find the most frequent item of an array. Go to the editor
+// Sample array : var arr1=[3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
+// Sample Output : [3,'a',2]
+
+const mostElePresent = function(arr){
+var count=0;
+const newArr=arr.reduce((acc,ele,ind,arr)=>{
+console.log(ele,arr.indexOf(ele),ind) // index of return first index of element
+if(arr.indexOf(ele)!=ind && acc.indexOf(ele)<0)
+acc.push(ele);
+//console.log(ele)
+return acc
+
+},[]);
+
+console.log(newArr);
+//console.log(count);
+}
+mostElePresent([3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3,7,4,7]);
+// character occourance in array
+const countedOccurrences = arr => {
+  return arr.reduce((acc, val) => {
+   
+    if (val in acc) {
+    
+      acc[val]++
+    }
+    else {
+      acc[val] = 1
+    }
+  //  console.log(JSON.stringify(acc));//pring object
+    return acc
+  }, {});
+};
+const a = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3,7,4,7];
+console.log(countedOccurrences(a)); // { 0:3, 8:2, 9:2, 12:3 }
+
+// charecher occourance from string
+
+const charOcc = function(str){
+
+    console.log( str.split(' ').join('').split(''));
+    console.log(str.charAt())
+
+  const strCharOcc=  str.toLowerCase().split(' ').join('').split('').reduce((acc,ele,ind,arr)=>{
+    
+    if (ele in acc){
+     acc[ele]++;
+    }
+    else
+    acc[ele]=1;
+    return acc;
+    },{})// acc point to empty object {}
+console.log(strCharOcc)
+}
+charOcc("This is my pet pr");
+
+// String word reverse
+
+</script>
